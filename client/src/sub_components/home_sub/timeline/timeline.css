@@ -1,6 +1,8 @@
 #time-line-outer{
     padding: 1%;
     text-align: left;
+    height: 28em;
+    overflow: auto;
 }
 
 btn-header{

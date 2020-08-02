@@ -5,8 +5,10 @@ import { Button, Header, Image } from "semantic-ui-react";
 import "./home.css";
 
 //My sub-components
-import TimeLine from "../../sub_components/timeline/TimeLine";
-import Chat from "../../sub_components/chats/Chat";
+import TimeLine from "../../sub_components/home_sub/timeline/TimeLine";
+import Chat from "../../sub_components/home_sub/chats/Chat";
+import VideoPlayer from '../../sub_components/home_sub/video_player';
+
 function HomePage(props) {
   return (
     <div id="home-outer">
@@ -18,7 +20,13 @@ function HomePage(props) {
 
         <div id="home-in">
           <div id="home-time-line">
-            <TimeLine />
+            <Header as="h3" block>
+              Your TimeLine:
+            </Header>
+            {/* <TimeLine /> */}
+            {/* Video player here!  */}
+            
+            <VideoPlayer />
           </div>
           <div id="home-chats">
             <Chat />

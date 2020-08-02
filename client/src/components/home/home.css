@@ -15,9 +15,9 @@
 
 #home-time-line{
     flex: 3;
-    border: 2px solid ;
-    border-radius: 5px;
+    border-right: 2px solid ;
     padding-right: 5px;
+    padding: 1%;
 }
 
 #home-chats{

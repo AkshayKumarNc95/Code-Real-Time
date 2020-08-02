@@ -2,7 +2,7 @@
   text-align: center;
   padding: 1%;
   display: block;
-  
+  overflow: hidden;
 }
 
 .App-logo {

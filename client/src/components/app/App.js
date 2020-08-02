@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 // My components
 import HomePage from '../home'; 
 // My sub components
-import Header from '../../sub_components/header/NavBar';
+import Header from '../../sub_components/common/header/NavBar';
 
 function App() {
   return (
