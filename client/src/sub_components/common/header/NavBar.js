@@ -1,46 +1,50 @@
-import React, { Component } from 'react';
-import { Menu, Segment } from 'semantic-ui-react';
+import React, { useState } from "react";
+import { Menu, Segment } from "semantic-ui-react";
 
 // Css
-import './nav.css';
+import "./nav.css";
+import { useHistory } from "react-router-dom";
 
-export default class NavBar extends Component {
-  state = { activeItem: 'home' }
+export default function NavBar(props) {
+  const [state, setState] = useState({ activeItem: "home" });
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  const history = useHistory();
 
-  render() {
-    const { activeItem } = this.state
+  function handleItemClick(e, { name }){
+    setState({ activeItem: name });
+    //console.log(history)
+    name = name === "home"? '': name; 
+    history.push(`/${name}`);
+  };
 
-    return (
-      <div id = 'nav-outer'>
-        <Menu pointing secondary color = "orange">
+  const { activeItem } = state;
+
+  return (
+    <div id="nav-outer">
+      <Menu pointing secondary color="orange">
+        <Menu.Item
+          name="home"
+          active={activeItem === "home"}
+          onClick={handleItemClick}
+        />
+        <Menu.Item
+          name="Stream"
+          active={activeItem === "Stream"}
+          onClick={handleItemClick}
+        />
+        <Menu.Item
+          name="friends"
+          active={activeItem === "friends"}
+          onClick={handleItemClick}
+        />
+        <Menu.Menu position="right">
           <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
+            name="logout"
+            active={activeItem === "logout"}
+            onClick={handleItemClick}
           />
-          <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Menu position='right'>
-            <Menu.Item
-              name='logout'
-              active={activeItem === 'logout'}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu>
-        </Menu>
-
-     
-      </div>
-    )
-  }
+        </Menu.Menu>
+      </Menu>
+    </div>
+  );
 }
