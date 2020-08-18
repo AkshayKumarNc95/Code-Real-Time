@@ -1,27 +1,29 @@
 #home-outer{
     border: 2px solid orange;
-    height: 39em;
+    height: 93%;
     border-radius: 5px;
     padding: 1%;
 }
 
 #home-in{
-    display: grid;
     border-radius: 10px;
-    height: 33em;
-    grid-gap: .5%;
-    grid-template-columns: 3fr 1fr;
+    height: 90%;
 }
 
 #home-time-line{
-    flex: 3;
+    width: 70%;
+    float: left;
     border-right: 2px solid ;
     padding-right: 5px;
     padding: 1%;
+    height: 98%;
+    margin-right: 1%;
 }
 
 #home-chats{
-    flex:1;
+    width: 28%;
+    float: right;
     border: 2px solid #a29bfe;
     border-radius: 5px;
+    height: 98%;
 }

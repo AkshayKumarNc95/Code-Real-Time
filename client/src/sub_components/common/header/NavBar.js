@@ -10,12 +10,12 @@ export default function NavBar(props) {
 
   const history = useHistory();
 
-  function handleItemClick(e, { name }){
+  function handleItemClick(e, { name }) {
     setState({ activeItem: name });
     //console.log(history)
-    name = name === "home"? '': name; 
+    name = name === "home" ? "" : name;
     history.push(`/${name}`);
-  };
+  }
 
   const { activeItem } = state;
 
@@ -39,8 +39,8 @@ export default function NavBar(props) {
         />
         <Menu.Menu position="right">
           <Menu.Item
-            name="logout"
-            active={activeItem === "logout"}
+            name="Login"
+            active={activeItem === "Login"}
             onClick={handleItemClick}
           />
         </Menu.Menu>

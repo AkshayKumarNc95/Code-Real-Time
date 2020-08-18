@@ -1,8 +1,14 @@
+
+#root{
+  height: 100%;
+}
+
 .App {
   text-align: center;
   padding: 1%;
   display: block;
   overflow: hidden;
+  height: 100%;
 }
 
 .App-logo {
