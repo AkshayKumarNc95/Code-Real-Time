@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-
+//Encrypt
 function encryptPass(password){
     return bcrypt.hash(password, 6); 
 }
