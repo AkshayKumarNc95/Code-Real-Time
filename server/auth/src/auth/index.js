@@ -14,7 +14,7 @@ router.get('/Auth', (req, res)=>{
 
     // Check if the token is still valid for the user! 
    
-    checkUserToken(content.user_name, token)
+    checkUserToken(content.UserName, token)
     .then(results =>{
         const count = results.recordset[0].cnt; 
 

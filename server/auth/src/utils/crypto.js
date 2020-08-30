@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt');
 
 //Encrypt
-function encryptPass(password){
-    return bcrypt.hash(password, 6); 
+function encryptPass(Password){
+    return bcrypt.hash(Password, 6); 
 }
 
-function isPasswordMatch(password, password_enc){
-    return bcrypt.compare(password,password_enc);
+function isPasswordMatch(Password, Password_enc){
+    return bcrypt.compare(Password,Password_enc);
 }
 
 module.exports = {encryptPass, isPasswordMatch}

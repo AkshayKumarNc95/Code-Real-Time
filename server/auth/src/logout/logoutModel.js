@@ -5,9 +5,9 @@ const pool = getConnection();
 
 
 
-function removeUserToken(user_name, token){
+function removeUserToken(UserName, token){
 
-    const cmd = `delete from tokens where user_id = (select id from users where user_name = '${user_name}') and token = '${token}'`;
+    const cmd = `delete from tokens where user_id = (select id from users where UserName = '${UserName}') and token = '${token}'`;
 
     const rqt = new sql.Request(pool);
 

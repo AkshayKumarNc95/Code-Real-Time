@@ -2,38 +2,38 @@ const validator = require("validator").default;
 
 function validateUserDetails(user) {
   const errors = [];
-  const {first_name, last_name, email, password, user_name} = user;
+  const {FirstName, LastName, Email, Password, UserName} = user;
 
-  if (!validator.isEmail(email)) {
+  if (!validator.isEmail(Email)) {
     errors.push({
       errorType: "Email",
       error: "Invalid Email",
     });
   }
 
-  if (validator.isEmpty(first_name) || !validator.isAlpha(first_name)) {
+  if (validator.isEmpty(FirstName) || !validator.isAlpha(FirstName)) {
     errors.push({
-      errorType: "First_Name",
+      errorType: "FirstName",
       error:
         "First Name should not be empty, and should only contain alphabets",
     });
   }
 
-  if (validator.isEmpty(last_name) || !validator.isAlpha(last_name)) {
+  if (validator.isEmpty(LastName) || !validator.isAlpha(LastName)) {
     errors.push({
-      errorType: "Last_Name",
+      errorType: "LastName",
       error: "Last Name should not be empty, and should only contain alphabets",
     });
   }
 
-  if (validator.isEmpty(user_name)) {
+  if (validator.isEmpty(UserName)) {
     errors.push({
-      errorType: "User_Name",
+      errorType: "UserName",
       error: "User Name should not be empty, and should only contain alphabets",
     });
   }
 
-  if (!validator.isAlphanumeric(password)) {
+  if (!validator.isAlphanumeric(Password)) {
     errors.push({
         errorType: "Password",
         error: "Password should not be empty, and should contain both alphabets and numbers",

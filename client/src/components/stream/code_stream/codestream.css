@@ -1,0 +1,12 @@
+.react-codemirror2{     
+height: 100% !important;
+width: 100% !important;
+text-align: left !important;
+border: 2px solid orange;
+border-radius: 5px !important;
+}
+.CodeMirror {     
+    height: 100% !important;
+    width: 100% !important;
+}
+

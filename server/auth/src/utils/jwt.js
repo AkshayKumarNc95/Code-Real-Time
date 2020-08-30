@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 
 const secret_key = 'Its A Secret!';
 
-function getToken(user_name){
-    return jwt.sign({user_name}, secret_key);
+function getToken(UserName){
+    return jwt.sign({UserName}, secret_key);
 }
 
 function parseToken(token){

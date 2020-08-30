@@ -11,7 +11,7 @@ router.get("/logout", (req, res) => {
   const token = req.headers.authorization.replace("Bearer ", "");
   const content = parseToken(token);
 
-  checkUserToken(content.user_name, token).then((results) => {
+  checkUserToken(content.UserName, token).then((results) => {
     const count = results.recordset[0].cnt;
 
     if (count == 0) {
@@ -19,7 +19,7 @@ router.get("/logout", (req, res) => {
     }
 
     // Log out now!
-    removeUserToken(content.user_name, token)
+    removeUserToken(content.UserName, token)
       .then((results) => {
         // Delete success!
         console.log(`User token - ${token} removed from the DB. `);

@@ -10,31 +10,32 @@ router.post("/signup", function (req, res) {
 
   const isVal = validateUserDetails(userDetails);
 
+
   if (isVal !== true) {
     res.status(401).send(isVal);
   }
 
-  validateUserName(userDetails.user_name)
+  validateUserName(userDetails.UserName)
     .then((result) => {
       const count = result.recordset[0].cnt;
       if (count > 0) {
         res
           .status(405)
           .send(
-            `UserName ${userDetails.user_name} is taken! Please choose another name!`
+            `UserName ${userDetails.UserName} is taken! Please choose another name!`
           );
       }
 
-      // Hashed password
-      const hashedPass = crypto.encryptPass(userDetails.password);
+      // Hashed Password
+      const hashedPass = crypto.encryptPass(userDetails.Password);
 
       hashedPass
         .then((hashedPass) => {
-          userDetails.password = hashedPass;
+          userDetails.Password = hashedPass;
 
           saveUser(userDetails)
             .then((val) => {
-              console.log(`User ${userDetails.user_name} saved!`);
+              console.log(`User ${userDetails.UserName} saved!`);
               res.status(200).end("Save successful!");
             })
             .catch((err) => {

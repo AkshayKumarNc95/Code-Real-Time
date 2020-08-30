@@ -1,0 +1,40 @@
+#stream-outer{
+    height: 88%;
+    widows: 100%;
+    border: 2px solid rgb(10, 209, 10);
+    border-radius: 5px;
+    
+}
+
+#stream-body{
+    display: grid;
+    grid-template-columns: 3fr 2fr; 
+    height: 85%;
+    width: 99%;
+    margin: .5%;
+}
+
+#stream-code-panel{
+    left : auto;
+    height: 100%;
+    display: inline-block;
+    background: rgba(255, 151, 0, 0.5);
+    border-radius: 3px;
+}
+
+#stream-video-panel{
+    margin-left: .5%;
+    display: inline-block;
+    height: 100%;
+    background-color:  rgba(0, 151, 19, 0.1);
+    
+    border-radius: 5px;
+}
+
+#stream-footer{
+    width: 99%;
+    margin-left:.5%;
+    border-radius: 5px;
+    height: 10%;
+    border: solid 1px red;
+}

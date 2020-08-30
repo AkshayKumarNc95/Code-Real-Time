@@ -15,3 +15,6 @@ code {
 html,body {
   height:100%;
 }
+
+@import '/node_modules/codemirror/lib/codemirror.css';
+@import '/node_modules/codemirror/theme/material.css';

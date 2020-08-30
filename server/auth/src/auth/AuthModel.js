@@ -4,11 +4,11 @@ const sql = require('mssql');
 const pool = getConnection();
 
 
-function checkUserToken(user_name, token){
+function checkUserToken(UserName, token){
 
     const cmd = `select count(u.id) cnt from users u
     inner join tokens t on t.user_id = u.id
-    where user_name = '${user_name}' and t.token = '${token}'`;
+    where UserName = '${UserName}' and t.token = '${token}'`;
 
     const rqt = new sql.Request(pool);
 

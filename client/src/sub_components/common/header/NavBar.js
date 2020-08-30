@@ -13,7 +13,6 @@ export default function NavBar(props) {
   function handleItemClick(e, { name }) {
     setState({ activeItem: name });
     //console.log(history)
-    name = name === "home" ? "" : name;
     history.push(`/${name}`);
   }
 
@@ -22,7 +21,11 @@ export default function NavBar(props) {
   return (
     <div id="nav-outer">
       <Menu pointing secondary color="orange">
-        <Menu.Item
+        <Menu.Item fitted = "vertically">
+          <img src='/logo.png' />
+        </Menu.Item>
+
+        {(props.isAuth && <> <Menu.Item
           name="home"
           active={activeItem === "home"}
           onClick={handleItemClick}
@@ -33,10 +36,10 @@ export default function NavBar(props) {
           onClick={handleItemClick}
         />
         <Menu.Item
-          name="friends"
-          active={activeItem === "friends"}
+          name="ToDo"
+          active={activeItem === "ToDo"}
           onClick={handleItemClick}
-        />
+        /> </>)}
         <Menu.Menu position="right">
           <Menu.Item
             name="Login"
