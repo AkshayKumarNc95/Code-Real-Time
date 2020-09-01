@@ -3,12 +3,12 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // My components
-import HomePage from "../home";
+import HomePage from "../../views/home";
 // My sub components
-import Header from "../../sub_components/common/header/NavBar";
-import Stream from "../stream";
-import { SignUp, Login } from "../auth";
-import Landing from "../../sub_components/landing_page";
+import Header from "../common/header/NavBar";
+import Stream from "../../views/stream";
+import { SignUp, Login } from "../../views/auth";
+import Landing from "../../views/landing_page";
 
 // utils
 import { authContext, authDef } from "../../utils/global";

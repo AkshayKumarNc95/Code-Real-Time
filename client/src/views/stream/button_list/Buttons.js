@@ -40,7 +40,7 @@ export default function Buttons(props) {
           <Icon name="circle" />
           Record
         </Button>
-        <Button icon id="buttons-btn-exit" color="grey">
+        <Button icon id="buttons-btn-exit" color="grey" onClick = {props.dropMe}>
           <Icon name="sign-out" />
         </Button>
       </div>

@@ -5,9 +5,9 @@ import { Button, Header, Image } from "semantic-ui-react";
 import "./home.css";
 
 //My sub-components
-import TimeLine from "../../sub_components/home_sub/timeline/TimeLine";
-import Chat from "../../sub_components/home_sub/chats/Chat";
-import VideoPlayer from "../../sub_components/home_sub/video_player";
+import TimeLine from "./timeline/TimeLine";
+import Chat from "./chats/Chat";
+import VideoPlayer from "./video_player";
 
 function HomePage(props) {
   const [state, setState] = useState({ path: null });

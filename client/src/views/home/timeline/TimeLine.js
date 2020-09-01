@@ -3,7 +3,7 @@ import { List, Button, Image, Header, Item } from "semantic-ui-react";
 
 // Css
 import "./timeline.css";
-import ListItem from "../../common/ListItem";
+import ListItem from "../../../components/common/ListItem/ListItem";
 
 export default function TimeLine(props) {
   const data = [
