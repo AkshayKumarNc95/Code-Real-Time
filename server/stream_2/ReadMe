@@ -1,0 +1,5 @@
+This project is a pure light weight socket IO server with node js; 
+* No DB interactions allowed here; 
+
+ToDo- 
+* Use PM2 for multiple instances. 
