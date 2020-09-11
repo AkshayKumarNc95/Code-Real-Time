@@ -1,0 +1,17 @@
+{
+  "name": "peer-server",
+  "version": "1.0.0",
+  "description": "Peer server for streaming video",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Akshay Kumar",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "peer": "^0.5.3"
+  }
+}

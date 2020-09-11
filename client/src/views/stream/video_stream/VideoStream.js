@@ -28,7 +28,7 @@ export default function VideoStream(props) {
     "socket-closed",
     "unavailable-id",
     "webrtc",
-    "peer-unavailable"
+    "peer-unavailable",
   ];
   // Video refs
   const myVideo = useRef();
@@ -112,7 +112,7 @@ export default function VideoStream(props) {
 
     peer.on("error", (e) => {
       console.log(e);
-      peer.destroy(); 
+      peer.destroy();
       if (FATAL_ERRORS.includes(e.type)) {
         startVideoStreaming(); // this function waits then tries the entire connection over again
       } else {
@@ -178,7 +178,7 @@ export default function VideoStream(props) {
         if (FATAL_ERRORS.includes(err.type)) {
           peer.destroy();
           // peer.reconnect(); // this function waits then tries the entire connection over again
-          startVideoStreaming(); 
+          startVideoStreaming();
         } else {
           console.log("Non fatal error: ", err.type);
         }
@@ -198,20 +198,30 @@ export default function VideoStream(props) {
   }
   //#endregion Setup
 
-  // stop both mic and camera
-function stopBothVideoAndAudio(stream) {
-  stream.getTracks().forEach(function(track) {
-      if (track.readyState == 'live') {
-          track.stop();
-      }
-  });
-}
-
   function startVideoStreaming() {
     const Peer = window.Peer;
 
     // Setup a peer!
-    var peer = (window.myPeer = new Peer(userName + roomId));
+    var peer = (window.myPeer = new Peer(userName + roomId, {
+      host: "localhost",
+      port: 9000,
+      path: "/peerjs",
+      config: {
+        iceServers: [
+          { url: "stun:stun01.sipphone.com" },
+          { url: "stun:stun.ekiga.net" },
+          { url: "stun:stunserver.org" },
+          { url: "stun:stun.softjoys.com" },
+          { url: "stun:stun.voiparound.com" },
+          { url: "stun:stun.voipbuster.com" },
+          { url: "stun:stun.voipstunt.com" },
+          { url: "stun:stun.voxgratia.org" },
+          { url: "stun:stun.xten.com" },
+        ],
+      },
+
+      debug: 3,
+    }));
 
     // Setup my peer events.
     setupPeerEvents(peer);
@@ -219,12 +229,21 @@ function stopBothVideoAndAudio(stream) {
 
   function stopVideoStreaming() {
     if (window.myPeer) {
-      stopBothVideoAndAudio(stream); 
+      stopBothVideoAndAudio(stream);
       window.myPeer.destroy(); // destroy the link
       window.myPeer = null; // destroy the conn
       setStream(null);
       myVideo.current.srcObject = null;
     }
+  }
+
+  // stop both mic and camera
+  function stopBothVideoAndAudio(stream) {
+    stream.getTracks().forEach(function (track) {
+      if (track.readyState == "live") {
+        track.stop();
+      }
+    });
   }
 
   return (
