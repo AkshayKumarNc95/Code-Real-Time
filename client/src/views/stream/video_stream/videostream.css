@@ -1,0 +1,42 @@
+#video-container {
+  padding: 5px;
+  width: 100%;
+  margin: auto;
+  height: 100%;
+  border: 1px solid green;
+}
+
+#grid-row-1, #grid-row-2 {
+  margin: 2%;
+  height: 49.5% !important;
+}
+
+#grid-row-1{
+    margin-bottom: 0px;
+}
+
+#grid-row-2{
+    margin-top: 0px;
+}
+#video-grid-out {
+  height: 100%;
+}
+
+.video-user {
+  border-radius: 2px;
+  padding: 2px;
+}
+
+#video-you {
+  /* //border:2.5px solid orange; */
+}
+
+
+
+#video-container  video {
+    margin: auto;
+    border: 1px solid blue;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}

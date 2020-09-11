@@ -6,6 +6,7 @@ import "./streamer.css";
 import CodeStream from "./code_stream";
 import Buttons from "./button_list";
 import config from "../../api/config.js";
+import VideoStream from "./video_stream/VideoStream";
 
 export default function Streamer(props) {
   // Declaration -
@@ -21,26 +22,33 @@ export default function Streamer(props) {
 
   // State
   const [roomId_state, setRoomId_state] = useState("");
-
+  const [users, setUsers] = useState([]);
 
   function onStreamClick(roomId) {
-    
-    if (socket) {
-      socket.disconnect(); 
-      socket.off();
-      socket.close();
+    // Code Streaming
+    startCodeSteraming(roomId);
+
+    // RoomId is set now -
+    // Video Streaming
+  }
+
+  function startCodeSteraming(roomId) {
+    if (window.socket) {
+      window.socket.disconnect();
+      window.socket.off();
+      window.socket.close();
     }
-    // Create the socket; 
-    socket  = window.socket = io(END_POINT);
+    // Create a new socket;
+    socket = window.socket = io(END_POINT);
 
     if (window.editor == null) {
       alert("Editor not mounted yet!");
     }
-    
-    if(editor == null){
+
+    if (editor == null) {
       editor = window.editor;
     }
-    
+
     let RoomId = roomId.trim();
     if (RoomId === "") {
       // Generate a roomId
@@ -68,6 +76,12 @@ export default function Streamer(props) {
       );
     });
 
+    socket.on("UpdatedRoomInfo", (users) => {
+      setUsers(users);
+      setRoomId_state(RoomId);
+      console.log("Updated User list, ", users);
+    });
+
     socket.emit(
       "join",
       (message) => {
@@ -75,7 +89,7 @@ export default function Streamer(props) {
       },
       { userId: auth.userId, roomId: RoomId, userName: auth.userName }
     );
-    setRoomId_state(RoomId);
+
   }
 
   function editorMounted(edr) {
@@ -84,23 +98,24 @@ export default function Streamer(props) {
     }
   }
 
-  function disconnectSocket(socket){
-    if(!socket){
-      return; 
+  function disconnectSocket(socket) {
+    if (!socket) {
+      return;
     }
-    
+
     socket.emit("leave", roomId_state);
     socket.disconnect();
     socket.off();
     socket.close();
+    setUsers([]);
   }
 
-  function disconnectOTClient(client){
-    if(!client){
+  function disconnectOTClient(client) {
+    if (!client) {
       return;
     }
 
-    // Disconnect from the server 
+    // Disconnect from the server
     client.serverAdapter.socket.emit("leave", roomId_state);
     client.serverAdapter.socket.disconnect();
     client.serverAdapter.socket.off();
@@ -108,40 +123,49 @@ export default function Streamer(props) {
 
     // Disconnect from the editor
     client.editorAdapter.detach();
+  }
+
+  function disconnectVideoPeer(){
 
   }
 
   function dropMeFromRoom() {
-    // Close the socket! 
-    disconnectSocket(window.socket); 
+    // Close the socket!
+    disconnectSocket(window.socket);
 
-    // Close the editor socket;   
+    // Close the editor socket;
     // Close editor sync with the OT.js
-    disconnectOTClient(window.client); 
+    disconnectOTClient(window.client);
 
-    // Update the code mirror to offline message... 
-    window.editor.setValue("//You are Offline... ")
+    // Update the code mirror to offline message...
+    window.editor.setValue("//You are Offline... ");
 
-    // Room Id Input should be empty now! 
+    // Room Id Input should be empty now!
     setRoomId_state("");
+
+    // Disconnect the video; 
+
   }
 
   return (
     <div id="stream-outer">
       <div id="stream-body">
         <div id="stream-code-panel">
-          <CodeStream
-            editorMounted={editorMounted}
-            theme="material"
-          />
+          <CodeStream editorMounted={editorMounted} theme="material" />
         </div>
-        <div id="stream-video-panel">Videos Here;</div>
+        <div id="stream-video-panel">
+          <VideoStream 
+          auth={auth} 
+          roomId={roomId_state} 
+          users={users} />
+        </div>
       </div>
       <div id="stream-footer">
         <Buttons
           onStreamClick={onStreamClick}
           roomId={roomId_state}
           dropMe={dropMeFromRoom}
+          users={users}
         />
       </div>
     </div>

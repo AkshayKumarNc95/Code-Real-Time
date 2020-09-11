@@ -3,6 +3,7 @@ import { Button, Icon, Label, Input } from "semantic-ui-react";
 
 // Custom
 import "./buttons.css";
+import Popup from "../../../components/common/popup/";
 
 // Buttons List for stream operations
 export default function Buttons(props) {
@@ -12,7 +13,6 @@ export default function Buttons(props) {
     setRoomId(props.roomId);
   }, [props]);
 
-  console.log(props);
   return (
     <div id="buttons-outer">
       <div id="buttons-left">
@@ -27,9 +27,8 @@ export default function Buttons(props) {
             <Icon name="play" />
             Stream/Join
           </Button>
-          <Label as="a" basic color="red" pointing="left">
-            {props.userCount ? props.userCount : 0}
-          </Label>
+
+          <Popup users = {props.users}></Popup>
         </Button>
 
         {/* Modal window here */}
@@ -40,7 +39,7 @@ export default function Buttons(props) {
           <Icon name="circle" />
           Record
         </Button>
-        <Button icon id="buttons-btn-exit" color="grey" onClick = {props.dropMe}>
+        <Button icon id="buttons-btn-exit" color="grey" onClick={props.dropMe}>
           <Icon name="sign-out" />
         </Button>
       </div>
