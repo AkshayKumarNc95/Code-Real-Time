@@ -10,12 +10,13 @@ const PopupFlowing = (props) => {
     <Popup
       trigger={
         <Label as="a" basic color="red" pointing="left">
-          {users.count ? users.count : 0}
+          {users.length>0 ? users.length : 0}
         </Label>
       }
       flowing
       hoverable
     >
+      {users.length>0 ?
       <Grid centered divided columns={users.length}>
         {users.map((user) => (
           <Grid.Column textAlign="center">
@@ -27,7 +28,8 @@ const PopupFlowing = (props) => {
             </h5>
           </Grid.Column>
         ))}
-      </Grid>
+      </Grid>: "No one is streaming yet!"
+}
     </Popup>
   );
 };

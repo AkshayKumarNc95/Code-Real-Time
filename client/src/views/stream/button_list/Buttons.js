@@ -9,9 +9,22 @@ import Popup from "../../../components/common/popup/";
 export default function Buttons(props) {
   const [roomId, setRoomId] = useState(props.roomId);
 
+  //
+  const [started, setStarted] = useState(false);
+
   useEffect(() => {
     setRoomId(props.roomId);
   }, [props]);
+
+  function startStreaming() {
+    props.onStreamClick(roomId);
+    setStarted(true);
+  }
+
+  function stopStreaming() {
+    props.dropMe();
+    setStarted(false);
+  }
 
   return (
     <div id="buttons-outer">
@@ -23,23 +36,37 @@ export default function Buttons(props) {
           onChange={(e) => setRoomId(e.target.value)}
         />
         <Button as="div" labelPosition="right" id="buttons-btn-add">
-          <Button color="black" onClick={() => props.onStreamClick(roomId)}>
+          <Button color="black" onClick={startStreaming} disabled={started}>
             <Icon name="play" />
-            Stream/Join
+            Stream
           </Button>
 
-          <Popup users = {props.users}></Popup>
+          <Popup users={props.users}></Popup>
         </Button>
 
         {/* Modal window here */}
       </div>
 
       <div id="buttons-right">
-        <Button icon labelPosition="left" id="buttons-btn-record">
+        <Button
+          icon
+          labelPosition="left"
+          disabled={!started}
+          id="buttons-btn-record"
+        >
           <Icon name="circle" />
           Record
         </Button>
-        <Button icon id="buttons-btn-exit" color="grey" onClick={props.dropMe}>
+
+        <Button
+          color="red"
+          icon
+          id="buttons-btn-exit"
+          disabled={!started}
+          labelPosition="right"
+          onClick={stopStreaming}
+        >
+          Exit
           <Icon name="sign-out" />
         </Button>
       </div>

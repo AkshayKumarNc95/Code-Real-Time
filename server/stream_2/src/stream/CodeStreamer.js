@@ -1,8 +1,9 @@
 const socketIO = require("socket.io")();
 const ot = require("ot");
 
-//Custom
+//#region Declarations 
 const StreamServer = {};
+
 const {
   addRoom,
   addUserToRoom,
@@ -11,8 +12,9 @@ const {
   removeUserFromRoom,
 } = require("../rooms/rooms.js");
 
-// StreamServer -
 StreamServer.io = socketIO;
+
+//#endregion 
 
 // Connection and setup -
 StreamServer.io.on("connection", (socket) => {
@@ -38,7 +40,7 @@ StreamServer.io.on("connection", (socket) => {
   });
 });
 
-// Socket functions
+// Leave Room; 
 function leaveRoom(socket) {
   console.log(
     `User - ${

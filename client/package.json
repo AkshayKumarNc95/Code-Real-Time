@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "codemirror": "^5.57.0",
     "react": "^16.13.1",
+    "react-beforeunload": "^2.2.4",
     "react-codemirror2": "^7.2.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-
 import { UnControlled } from "react-codemirror2";
 import "./codestream.css";
-
 import "codemirror/mode/xml/xml.js";
 import "codemirror/mode/javascript/javascript.js";
 import "codemirror/addon/hint/show-hint";

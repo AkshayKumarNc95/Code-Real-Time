@@ -3,20 +3,19 @@ import { Grid, Image } from "semantic-ui-react";
 
 // Custom
 import "./videostream.css";
-import VideoPlayer from "../../home/video_player";
-import { commands } from "codemirror";
+import config from "../../../api/config";
 
 export default function VideoStream(props) {
-  // Props
+  // State.
+  const [stream, setStream] = useState();
+
+  //#region Declarations
   let auth = props.auth;
   const users = props.users;
   const roomId = props.roomId;
   const userName = auth.userName;
-
-  // State.
-  const [stream, setStream] = useState();
-
-  // Declarations
+  const HOST = config.PEER_SERVER_HOST;
+  const PORT = config.PEER_SERVER_PORT;
   const peers = new Set();
   const FATAL_ERRORS = [
     "invalid-id",
@@ -30,11 +29,14 @@ export default function VideoStream(props) {
     "webrtc",
     "peer-unavailable",
   ];
-  // Video refs
+  //#endregion
+
+  //#region Video refs
   const myVideo = useRef();
   const peerVideo_1 = useRef();
   const peerVideo_2 = useRef();
   const peerVideo_3 = useRef();
+  //#endregion
 
   //#region Effects
 
@@ -68,7 +70,7 @@ export default function VideoStream(props) {
     if (!stream) {
       return;
     }
-    // Start streaming!
+    // Start PEER streaming!
     startVideoStreaming();
   }, [stream]);
 
@@ -198,13 +200,14 @@ export default function VideoStream(props) {
   }
   //#endregion Setup
 
+  //#region Core
   function startVideoStreaming() {
     const Peer = window.Peer;
 
     // Setup a peer!
     var peer = (window.myPeer = new Peer(userName + roomId, {
-      host: "localhost",
-      port: 9000,
+      host: HOST,
+      port: PORT,
       path: "/peerjs",
       config: {
         iceServers: [
@@ -245,12 +248,13 @@ export default function VideoStream(props) {
       }
     });
   }
-
+  //#endregion
+  
   return (
     <div id="video-container">
       <Grid id="video-grid-out">
         <Grid.Row columns="2" id="grid-row-1" id="grid-row-1">
-          <Grid.Column className="video-user" id="video-you">
+          <Grid.Column className="video-user" id="video-you" >
             <video
               width="320"
               height="340"

@@ -9,27 +9,24 @@ import config from "../../api/config.js";
 import VideoStream from "./video_stream/VideoStream";
 
 export default function Streamer(props) {
-  // Declaration -
-  let editor = null;
-  let socket = null;
-  let client = null;
-
-  //Props
-  const auth = props.Auth;
-
-  // Const
-  const END_POINT = config.SERVER_ADDRESS;
-
   // State
   const [roomId_state, setRoomId_state] = useState("");
   const [users, setUsers] = useState([]);
 
-  function onStreamClick(roomId) {
-    // Code Streaming
-    startCodeSteraming(roomId);
+  //#region Declaration
+  let client; 
+  let editor = null;
+  let socket = null;
+  const auth = props.Auth;
+  const END_POINT = config.SERVER_ADDRESS;
 
-    // RoomId is set now -
-    // Video Streaming
+  //#endregion
+
+  //#region CodeStreaming
+  function editorMounted(edr) {
+    if (!editor) {
+      editor = window.editor = edr;
+    }
   }
 
   function startCodeSteraming(roomId) {
@@ -89,13 +86,6 @@ export default function Streamer(props) {
       },
       { userId: auth.userId, roomId: RoomId, userName: auth.userName }
     );
-
-  }
-
-  function editorMounted(edr) {
-    if (!editor) {
-      editor = window.editor = edr;
-    }
   }
 
   function disconnectSocket(socket) {
@@ -124,9 +114,23 @@ export default function Streamer(props) {
     // Disconnect from the editor
     client.editorAdapter.detach();
   }
+ //#endregion
 
-  function disconnectVideoPeer(){
+  //#region effects
+  useEffect(() => {
+    return () => {
+      dropMeFromRoom();
+    };
+  }, []);
 
+  //#endregion effects
+
+  //#region Core
+  function onStreamClick(roomId) {
+    // Code Streaming
+    startCodeSteraming(roomId);
+
+    // Video Streaming just needs the roomId to be set! 
   }
 
   function dropMeFromRoom() {
@@ -143,10 +147,11 @@ export default function Streamer(props) {
     // Room Id Input should be empty now!
     setRoomId_state("");
 
-    // Disconnect the video; 
-
+    // Disconnect the video;
   }
 
+  //#endregion
+  
   return (
     <div id="stream-outer">
       <div id="stream-body">
@@ -154,10 +159,7 @@ export default function Streamer(props) {
           <CodeStream editorMounted={editorMounted} theme="material" />
         </div>
         <div id="stream-video-panel">
-          <VideoStream 
-          auth={auth} 
-          roomId={roomId_state} 
-          users={users} />
+          <VideoStream auth={auth} roomId={roomId_state} users={users} />
         </div>
       </div>
       <div id="stream-footer">
