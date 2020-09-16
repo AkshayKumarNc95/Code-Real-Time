@@ -13,7 +13,7 @@ Realtime coding and live streaming App.
 
 ![alt text](screenshots/Stream_2.PNG "Stream#2 Page.") 
 
-![alt text](screenshots/Stream_3.PNG "Stream#3 Page.") 
+![alt text](screenshots/Stream_3.png "Stream#3 Page.") 
 
 ![alt text](screenshots/StreamCode.PNG "StreamCode Page.") 
 
