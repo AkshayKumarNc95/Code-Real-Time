@@ -1,16 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Button, Icon, Label, Input } from "semantic-ui-react";
+import useScreenRecording from "use-screen-recording";
 
 // Custom
 import "./buttons.css";
 import Popup from "../../../components/common/popup/";
 
+import Recorder from "../screen_record/ScreenRecord";
+
 // Buttons List for stream operations
 export default function Buttons(props) {
   const [roomId, setRoomId] = useState(props.roomId);
-
+  const {
+    isRecording,
+    recording,
+    toggleRecording,
+    startRecording,
+    stopRecording,
+  } = useScreenRecording();
   //
   const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (recording) {
+      // save
+      console.log(recording);
+    }
+  }, [recording]);
 
   useEffect(() => {
     setRoomId(props.roomId);
@@ -24,6 +40,10 @@ export default function Buttons(props) {
   function stopStreaming() {
     props.dropMe();
     setStarted(false);
+  }
+
+  function toggleRecording_() {
+    toggleRecording();
   }
 
   return (
@@ -51,13 +71,13 @@ export default function Buttons(props) {
         <Button
           icon
           labelPosition="left"
-          disabled={!started}
+          disabled={true || !started}
           id="buttons-btn-record"
+          onClick={toggleRecording_}
         >
           <Icon name="circle" />
-          Record
+          {isRecording ? "Stop Recording" : "Start Recording"}
         </Button>
-
         <Button
           color="red"
           icon

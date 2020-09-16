@@ -37,11 +37,11 @@ function App() {
               {isAuth && (
                 <>
                   <Route
-                    path="/home"
+                    path="/History"
                     render={(props) => <HomePage Auth={Auth} />}
                   />
                   <Route
-                    path="/stream"
+                    path="/Stream"
                     render={(props) => <Stream Auth={Auth} />}
                   />
                 </>

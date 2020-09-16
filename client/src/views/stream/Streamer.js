@@ -7,6 +7,7 @@ import CodeStream from "./code_stream";
 import Buttons from "./button_list";
 import config from "../../api/config.js";
 import VideoStream from "./video_stream/VideoStream";
+import {streamDef} from "../../utils/global"; 
 
 export default function Streamer(props) {
   // State
@@ -29,7 +30,7 @@ export default function Streamer(props) {
     }
   }
 
-  function startCodeSteraming(roomId) {
+  function startCodeStreaming(roomId) {
     if (window.socket) {
       window.socket.disconnect();
       window.socket.off();
@@ -119,6 +120,7 @@ export default function Streamer(props) {
   //#region effects
   useEffect(() => {
     return () => {
+      console.log('called!');
       dropMeFromRoom();
     };
   }, []);
@@ -128,9 +130,10 @@ export default function Streamer(props) {
   //#region Core
   function onStreamClick(roomId) {
     // Code Streaming
-    startCodeSteraming(roomId);
+    startCodeStreaming(roomId);
 
     // Video Streaming just needs the roomId to be set! 
+    streamDef.isStreaming = true; 
   }
 
   function dropMeFromRoom() {
@@ -142,12 +145,13 @@ export default function Streamer(props) {
     disconnectOTClient(window.client);
 
     // Update the code mirror to offline message...
-    window.editor.setValue("//You are Offline... ");
+    window.editor && window.editor.setValue("//You are Offline... ");
 
     // Room Id Input should be empty now!
     setRoomId_state("");
 
     // Disconnect the video;
+    streamDef.isStreaming = false; 
   }
 
   //#endregion
