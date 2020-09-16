@@ -9,11 +9,11 @@ Realtime coding and live streaming App.
 
 ![alt text](screenshots/SignUp.PNG "SignUp Page.") 
 
-![alt text](screenshots/Stream#1.PNG "Stream#1 Page.") 
+![alt text](screenshots/Stream_1.PNG "Stream#1 Page.") 
 
-![alt text](screenshots/Stream#2.PNG "Stream#2 Page.") 
+![alt text](screenshots/Stream_2.PNG "Stream#2 Page.") 
 
-![alt text](screenshots/Stream#3.PNG "Stream#3 Page.") 
+![alt text](screenshots/Stream_3.PNG "Stream#3 Page.") 
 
 ![alt text](screenshots/StreamCode.PNG "StreamCode Page.") 
 
