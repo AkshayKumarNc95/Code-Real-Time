@@ -1,6 +1,11 @@
 # CodeRealTime
 Realtime coding and live streaming App. 
 
+**Starting services**
+  * Follow the readme files for service specific instructions (if exists)
+  * npm install
+  * npm start
+
 Phase 1 - **Completed**
 * Live Video Streaming (Max 4 peers)
 * Live Code Streaming with node - socket io
