@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useContext, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // My components
 import HomePage from "../../views/home";
 // My sub components
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <Router>
         <div id="app-outer" ref={divRef}>
           <Header isAuth={isAuth} />

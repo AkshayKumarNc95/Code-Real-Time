@@ -6,14 +6,13 @@ import "./login.css";
 
 import { requestLogin } from "../../../api/AuthService";
 
-import {authContext} from '../../../utils/global';
+import { authContext } from "../../../utils/global";
+import { toast } from "react-toastify";
 
 export default function Login(props) {
   const history = useHistory();
 
-
-  const {auth,setAuth}= useContext(authContext);
-
+  const { auth, setAuth } = useContext(authContext);
 
   const defaultError = {
     UserName: { content: null },
@@ -67,7 +66,7 @@ export default function Login(props) {
     if (!validateInputs()) {
       return;
     }
-    
+
     // Show loader
     setIsLoading(true);
     //Api Call to update the results.
@@ -77,21 +76,25 @@ export default function Login(props) {
 
         const token_new = response.data.token;
         const userId = response.data.userId;
-        //Todo -  Save the token and proceed =>
-      
-        setAuth({isAuthenticated : true, token: token_new, userName : formValues.UserName, userId});
-        // Now: Redirect to the Login Page...
-        history.push("/");
+
+        setAuth({
+          isAuthenticated: true,
+          token: token_new,
+          userName: formValues.UserName,
+          userId,
+        });
+        // Now: Redirect to the Stream Page...
+        history.push("/stream");
       })
       .catch((err) => {
         // check status code.
         // console.log(err.response.status);
         if (err.response && err.response.status == 405) {
-          alert("UserName already exists!");
+          toast("UserName already exists!", { type: toast.TYPE.ERROR });
         } else if (err.response && err.response.status >= 500) {
-          alert("Server Error!");
+          toast("Server Error!", { type: toast.TYPE.ERROR });
         } else {
-          alert("No response from the server!");
+          toast("No response from the server!", { type: toast.TYPE.ERROR });
         }
 
         setIsLoading(false);

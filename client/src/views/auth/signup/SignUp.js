@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-
 import { Form, Button, Header, Loader, Dimmer } from "semantic-ui-react";
 import "./signup.css";
 import { requestSignup } from "../../../api/AuthService";
-
 import { useHistory } from "react-router-dom";
+import {toast} from 'react-toastify'; 
+
 
 export default function SignUp(props) {
   const defaultError = {
@@ -69,7 +69,7 @@ export default function SignUp(props) {
     requestSignup(formValues)
       .then((response) => {
         console.log(response);
-
+        toast('Signup successful!'); 
         setIsLoading(false);
 
         // Now: Redirect to the Login Page...
@@ -79,17 +79,14 @@ export default function SignUp(props) {
         // check status code.
         // console.log(err.response.status);
         if (err.reponse && err.response.status == 405) {
-          alert("UserName already exists!");
+          toast("UserName already exists!", { type: toast.TYPE.ERROR});
         } else if (err.reponse && err.response.status >= 500) {
-          alert("Server Error!");
+          toast("Server Error!", { type: toast.TYPE.ERROR});
         } else {
-          alert("No resonse from the server!");
+          toast("No resonse from the server!", { type: toast.TYPE.ERROR});
         }
-
         setIsLoading(false);
       });
-
-    // Show save failure message.
   }
 
   const handleInputChange = (e) =>

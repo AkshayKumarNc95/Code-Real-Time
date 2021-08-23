@@ -8,6 +8,7 @@ import Buttons from "./button_list";
 import config from "../../api/config.js";
 import VideoStream from "./video_stream/VideoStream";
 import {streamDef} from "../../utils/global"; 
+import { toast } from "react-toastify";
 
 export default function Streamer(props) {
   // State
@@ -40,7 +41,7 @@ export default function Streamer(props) {
     socket = window.socket = io(END_POINT);
 
     if (window.editor == null) {
-      alert("Editor not mounted yet!");
+      toast("Editor not mounted yet!",  { type: toast.TYPE.ERROR}); 
     }
 
     if (editor == null) {

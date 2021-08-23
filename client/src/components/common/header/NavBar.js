@@ -5,6 +5,7 @@ import { Menu, Segment } from "semantic-ui-react";
 import "./nav.css";
 import { useHistory } from "react-router-dom";
 import { streamDef } from "../../../utils/global";
+import { toast } from "react-toastify";
 
 export default function NavBar(props) {
   const [state, setState] = useState({ activeItem: "home" });
@@ -13,7 +14,7 @@ export default function NavBar(props) {
 
   function handleItemClick(e, { name }) {
     if (name != "Stream" && streamDef.isStreaming) {
-      alert("You cannot navigate to other tabs while streaming!");
+      toast("You cannot navigate to other tabs while streaming!");
       return;
     }
 
