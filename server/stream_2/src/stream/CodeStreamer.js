@@ -1,19 +1,17 @@
 const socketIO = require("socket.io")();
 const ot = require("ot");
-
-//#region Declarations 
-const StreamServer = {};
-
 const {
   addRoom,
   addUserToRoom,
   isRoomExist,
   getRoom,
   removeUserFromRoom,
+  deleteRoom
 } = require("../rooms/rooms.js");
 
+//#region Declarations 
+const StreamServer = {};
 StreamServer.io = socketIO;
-
 //#endregion 
 
 // Connection and setup -
@@ -35,6 +33,7 @@ StreamServer.io.on("connection", (socket) => {
     console.log(
       `User - ${socket.userName ? socket.userName : ""} Disconnected!`
     );
+    leaveRoom(socket);
     socket.leaveAll();
     socket.disconnect();
   });
@@ -51,6 +50,9 @@ function leaveRoom(socket) {
   // Trigger an event, and send the room details to the client.
   removeUserFromRoom(socket.room, socket.userId);
   const room = getRoom(socket.room);
+  if(room.activeUsers.length < 1){
+    deleteRoom(socket.room); 
+  }
   StreamServer.io.sockets
     .in(socket.room)
     .emit("UpdatedRoomInfo", room.activeUsers);

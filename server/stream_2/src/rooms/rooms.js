@@ -1,9 +1,4 @@
-// Array of connected users
-// roomId = {
-//   OtServer: {},
-//   activeUsers: [{ userId: "", userName: "" }],
-// };
-
+// In memory rooms; 
 const rooms = {};
 
 // Add room
@@ -51,6 +46,10 @@ const getRoom = (roomId) => {
   return rooms[roomId];
 };
 
+const deleteRoom = (roomId) => {
+  return delete rooms[roomId]; 
+}
+
 module.exports = {
   addRoom,
   isRoomExist,
@@ -58,4 +57,5 @@ module.exports = {
   addUserToRoom,
   removeUserFromRoom,
   getUsersInRoom,
+  deleteRoom,
 };

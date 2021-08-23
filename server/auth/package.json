@@ -24,5 +24,8 @@
     "mssql": "^6.2.1",
     "nodemon": "^2.0.4",
     "validator": "^13.1.1"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
   }
 }

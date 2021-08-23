@@ -12,14 +12,14 @@ router.post("/signup", function (req, res) {
 
 
   if (isVal !== true) {
-    res.status(401).send(isVal);
+    return res.status(4).send(isVal);
   }
 
   validateUserName(userDetails.UserName)
     .then((result) => {
       const count = result.recordset[0].cnt;
       if (count > 0) {
-        res
+        return res
           .status(405)
           .send(
             `UserName ${userDetails.UserName} is taken! Please choose another name!`
@@ -36,7 +36,7 @@ router.post("/signup", function (req, res) {
           saveUser(userDetails)
             .then((val) => {
               console.log(`User ${userDetails.UserName} saved!`);
-              res.status(200).end("Save successful!");
+              return res.status(200).end("Save successful!");
             })
             .catch((err) => {
               throw err; 

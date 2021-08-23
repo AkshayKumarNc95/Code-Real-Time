@@ -6,12 +6,11 @@ function getConnection(){
     if(connectionPool){
         return connectionPool;
     };
-
     const connection = new sql.ConnectionPool({
-        user: 'admin',
-        password: 'admin1234$',
-        server: 'localhost',
-        database: 'AuthDB'
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        server: process.env.SERVER,
+        database: process.env.DATABASE
     });
 
     connection.connect(err=>{
