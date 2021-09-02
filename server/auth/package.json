@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "dev": "node ./bin/www.js"
+    "start": "node ./bin/www",
+    "dev": "node ./bin/www"
   },
   "nodemonConfig": {
     "events": {
