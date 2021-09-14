@@ -1,5 +1,7 @@
 # CodeRealTime
-Realtime coding and live streaming App. 
+Realtime coding and live streaming Application built wiht React Js, and Node Js. 
+
+The text is transmitted using the socket.io and uses Operational Transformation to synchronise data between the clients. Please feel free to pull the code and try it yourelf. 
 
 **Starting services**
   * Follow the readme files for service specific instructions (if exists)
