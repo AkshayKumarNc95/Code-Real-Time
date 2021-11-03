@@ -24,6 +24,6 @@
     "morgan": "~1.9.1",
     "mssql": "^6.2.1",
     "nodemon": "^2.0.4",
-    "validator": "^13.1.1"
+    "validator": "^13.7.0"
   }
 }
